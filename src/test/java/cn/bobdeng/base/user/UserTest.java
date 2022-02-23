@@ -50,6 +50,38 @@ public class UserTest {
 
     @Test
     public void should_suspend_when_user_is_suspend() {
+        UserDO userDO=new UserDO(User.create());
+        userDao.save(userDO);
+        User user = Users.userRepository.findById(userDO.getId()).orElse(null);
 
+        user.suspend();
+
+        UserDO savedUserDO = userDao.findById(userDO.getId()).orElse(null);
+        assertThat(savedUserDO.getStatus(),is(UserStatusEnum.suspend.getStatus()));
+    }
+
+    @Test
+    public void should_deleted_when_user_is_delete() {
+        UserDO userDO=new UserDO(User.create());
+        userDao.save(userDO);
+        User user = Users.userRepository.findById(userDO.getId()).orElse(null);
+
+        user.remove();
+
+        UserDO savedUserDO = userDao.findById(userDO.getId()).orElse(null);
+        assertThat(savedUserDO.getStatus(),is(UserStatusEnum.deleted.getStatus()));
+    }
+
+    @Test
+    public void should_active_when_user_is_active() {
+        UserDO userDO=new UserDO(User.create());
+        userDO.setStatus(UserStatusEnum.suspend.getStatus());
+        userDao.save(userDO);
+        User user = Users.userRepository.findById(userDO.getId()).orElse(null);
+
+        user.active();
+
+        UserDO savedUserDO = userDao.findById(userDO.getId()).orElse(null);
+        assertThat(savedUserDO.getStatus(),is(UserStatusEnum.active.getStatus()));
     }
 }

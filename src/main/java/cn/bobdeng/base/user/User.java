@@ -1,14 +1,19 @@
 package cn.bobdeng.base.user;
 
-import static cn.bobdeng.base.user.Users.userMobileRepository;
-import static cn.bobdeng.base.user.Users.userPasswordRepository;
+import static cn.bobdeng.base.user.Users.*;
 
 public class User {
     private UserId id;
     private UserStatus status;
+
+    public User(UserId id, UserStatus status) {
+        this.id = id;
+        this.status = status;
+    }
+
     public static User create() {
         User user = new User(UserId.create());
-        user.status=UserStatus.active();
+        user.status = UserStatus.active();
         return user;
     }
 
@@ -43,5 +48,23 @@ public class User {
 
     public UserStatus status() {
         return status;
+    }
+
+    public void suspend() {
+        UserStatus newStatus = UserStatus.suspend();
+        setStatus(newStatus);
+    }
+
+    private void setStatus(UserStatus newStatus) {
+        this.status = newStatus;
+        userRepository.save(this);
+    }
+
+    public void remove() {
+        setStatus(UserStatus.deleted());
+    }
+
+    public void active() {
+        setStatus(UserStatus.active());
     }
 }

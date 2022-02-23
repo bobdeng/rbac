@@ -13,6 +13,18 @@ public class UserStatus {
         return new UserStatus(UserStatusEnum.active);
     }
 
+    public static UserStatus of(String status) {
+        return new UserStatus(UserStatusEnum.of(status));
+    }
+
+    public static UserStatus suspend() {
+        return new UserStatus(UserStatusEnum.suspend);
+    }
+
+    public static UserStatus deleted() {
+        return new UserStatus(UserStatusEnum.deleted);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

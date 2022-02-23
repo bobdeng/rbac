@@ -13,6 +13,10 @@ public class UserId {
         return new UserId(UUID.randomUUID().toString());
     }
 
+    public static UserId of(String id) {
+        return new UserId(id);
+    }
+
     public String getId() {
         return id;
     }
