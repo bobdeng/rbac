@@ -1,11 +1,13 @@
-cn/bobdeng/base/TenantId.java
- cn.bobdeng.base.TenantId
-cn/bobdeng/base/UserId.java
- cn.bobdeng.base.UserId
 cn/bobdeng/base/Mobile.java
  cn.bobdeng.base.Mobile
+cn/bobdeng/base/UserId.java
+ cn.bobdeng.base.UserId
+cn/bobdeng/base/TenantId.java
+ cn.bobdeng.base.TenantId
 cn/bobdeng/base/UserMobile.java
  cn.bobdeng.base.UserMobile
+cn/bobdeng/base/EncodedPassword.java
+ cn.bobdeng.base.EncodedPassword
 cn/bobdeng/base/PasswordEncoder.java
  cn.bobdeng.base.PasswordEncoder
 cn/bobdeng/base/Users.java

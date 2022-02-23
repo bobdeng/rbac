@@ -30,6 +30,12 @@ public class User {
     }
 
     public void setPassword(Password password) {
-        userPasswordRepository.save(this,password);
+        userPasswordRepository.save(this, password);
+    }
+
+    public boolean verifyPassword(Password password) {
+        return userPasswordRepository.findByUser(this)
+                .filter(encodedPassword -> encodedPassword.match(password))
+                .isPresent();
     }
 }

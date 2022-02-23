@@ -54,4 +54,22 @@ public class UserPasswordTest {
         assertThat(passwords.size(), is(1));
         assertThat(passwords.get(0).getPassword(), is(encodedPassword));
     }
+
+    @Test
+    public void should_fail_when_verify_password_and_no_password() {
+        User user = new User(new UserId("123456"));
+        assertThat(user.verifyPassword(new Password("123456")), is(false));
+    }
+
+    @Test
+    public void should_success_when_verify_success() {
+        User user = new User(new UserId("123456"));
+        PasswordDO passwordDO = new PasswordDO();
+        passwordDO.setId(user.id());
+        passwordDO.setPassword("123123");
+        dummyDao.save(passwordDO);
+        when(Users.passwordEncoder.verify(new Password("123456"), new EncodedPassword("123123"))).thenReturn(true);
+
+        assertThat(user.verifyPassword(new Password("123456")), is(true));
+    }
 }

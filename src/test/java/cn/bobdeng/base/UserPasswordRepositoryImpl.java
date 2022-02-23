@@ -2,6 +2,8 @@ package cn.bobdeng.base;
 
 import cn.bobdeng.dummydao.DummyDao;
 
+import java.util.Optional;
+
 public class UserPasswordRepositoryImpl implements UserPasswordRepository {
     private DummyDao<PasswordDO, String> dummyDao;
 
@@ -16,5 +18,11 @@ public class UserPasswordRepositoryImpl implements UserPasswordRepository {
         passwordDO.setPassword(password.encode());
         passwordDO.setId(user.id());
         dummyDao.save(passwordDO);
+    }
+
+    @Override
+    public Optional<EncodedPassword> findByUser(User user) {
+        return dummyDao.findById(user.id())
+                .map(passwordDO -> new EncodedPassword(passwordDO.getPassword()));
     }
 }
