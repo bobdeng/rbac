@@ -2,6 +2,7 @@ package cn.bobdeng.base;
 
 public class Users {
     public static UserRepository userRepository;
+    public static UserMobileRepository userMobileRepository;
     private TenantId tenantId;
 
     public Users(TenantId tenantId) {

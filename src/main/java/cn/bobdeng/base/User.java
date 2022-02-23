@@ -14,4 +14,12 @@ public class User {
     public UserId getId() {
         return id;
     }
+
+    public String id() {
+        return id.getId();
+    }
+
+    public void bindMobile(Mobile mobile) {
+        Users.userMobileRepository.save(this,new UserMobile(mobile));
+    }
 }

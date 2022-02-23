@@ -12,4 +12,8 @@ public class UserId {
     public static UserId create() {
         return new UserId(UUID.randomUUID().toString());
     }
+
+    public String getId() {
+        return id;
+    }
 }

@@ -13,7 +13,7 @@ public class UserTest {
         Users users = new Users();
         Users.userRepository = mock(UserRepository.class);
         User user = users.newUser();
-        assertThat(user.getId(), notNullValue());
+        assertThat(user.id(), notNullValue());
         verify(Users.userRepository).save(users, user);
     }
 
