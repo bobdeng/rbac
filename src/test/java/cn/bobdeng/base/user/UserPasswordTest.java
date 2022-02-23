@@ -1,7 +1,6 @@
-package cn.bobdeng.base;
+package cn.bobdeng.base.user;
 
 import cn.bobdeng.dummydao.DummyDao;
-import cn.bobdeng.dummydao.IdGenerator;
 import cn.bobdeng.dummydao.UUIDGeneratorImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

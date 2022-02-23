@@ -1,13 +1,15 @@
-package cn.bobdeng.base;
+package cn.bobdeng.base.user;
 
-import static cn.bobdeng.base.Users.userMobileRepository;
-import static cn.bobdeng.base.Users.userPasswordRepository;
+import static cn.bobdeng.base.user.Users.userMobileRepository;
+import static cn.bobdeng.base.user.Users.userPasswordRepository;
 
 public class User {
     private UserId id;
-
+    private UserStatus status;
     public static User create() {
-        return new User(UserId.create());
+        User user = new User(UserId.create());
+        user.status=UserStatus.active();
+        return user;
     }
 
     public User(UserId id) {
@@ -37,5 +39,9 @@ public class User {
         return userPasswordRepository.findByUser(this)
                 .filter(encodedPassword -> encodedPassword.match(password))
                 .isPresent();
+    }
+
+    public UserStatus status() {
+        return status;
     }
 }

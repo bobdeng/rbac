@@ -1,4 +1,4 @@
-package cn.bobdeng.base;
+package cn.bobdeng.base.user;
 
 public interface PasswordEncoder {
     String encode(String rawPassword);

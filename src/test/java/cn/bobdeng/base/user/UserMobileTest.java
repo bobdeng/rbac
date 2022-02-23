@@ -1,4 +1,4 @@
-package cn.bobdeng.base;
+package cn.bobdeng.base.user;
 
 import cn.bobdeng.dummydao.DummyDao;
 import cn.bobdeng.dummydao.UUIDGeneratorImpl;

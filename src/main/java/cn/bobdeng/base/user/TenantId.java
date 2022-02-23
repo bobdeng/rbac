@@ -1,4 +1,4 @@
-package cn.bobdeng.base;
+package cn.bobdeng.base.user;
 
 public class TenantId {
     private String id;

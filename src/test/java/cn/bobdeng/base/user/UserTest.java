@@ -1,4 +1,4 @@
-package cn.bobdeng.base;
+package cn.bobdeng.base.user;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +15,7 @@ public class UserTest {
         User user = users.newUser();
         assertThat(user.id(), notNullValue());
         verify(Users.userRepository).save(users, user);
+        assertThat(user.status(), is(UserStatus.active()));
     }
 
     @Test

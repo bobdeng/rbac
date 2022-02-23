@@ -1,9 +1,9 @@
-package cn.bobdeng.base;
+package cn.bobdeng.base.user;
 
 
 import java.util.Objects;
 
-import static cn.bobdeng.base.Users.*;
+import static cn.bobdeng.base.user.Users.*;
 public class Password {
     private String rawPassword;
 
