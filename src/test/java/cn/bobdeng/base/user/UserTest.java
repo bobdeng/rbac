@@ -1,31 +1,38 @@
 package cn.bobdeng.base.user;
 
+import cn.bobdeng.dummydao.DummyDao;
+import cn.bobdeng.dummydao.UUIDGeneratorImpl;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 public class UserTest {
+    private DummyDao<UserDO, String> userDao;
+
+    @BeforeEach
+    public void init() {
+        userDao = new DummyDao<>(UserDO.class, "id", new UUIDGeneratorImpl());
+        Users.userRepository = new UserRepositoryImpl(userDao);
+    }
+
     @Test
     public void should_create_user_without_tenant() {
         Users users = new Users();
-        Users.userRepository = mock(UserRepository.class);
         User user = users.newUser();
         assertThat(user.id(), notNullValue());
-        verify(Users.userRepository).save(users, user);
         assertThat(user.status(), is(UserStatus.active()));
+        assertThat(userDao.all().size(), is(1));
     }
 
     @Test
     public void should_create_user_with_tenant() {
         TenantId tenant = TenantId.of("123");
         Users users = Users.ofTenant(tenant);
-        Users.userRepository = mock(UserRepository.class);
         User user = users.newUser();
         assertThat(user.getId(), notNullValue());
-        verify(Users.userRepository).save(users, user);
+        assertThat(userDao.all().size(), is(1));
     }
 
     @Test
@@ -39,5 +46,10 @@ public class UserTest {
     public void should_return_null_when_has_no_tenantId() {
         Users users = new Users();
         assertThat(users.tenantId(), nullValue());
+    }
+
+    @Test
+    public void should_suspend_when_user_is_suspend() {
+
     }
 }
