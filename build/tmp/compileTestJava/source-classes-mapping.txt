@@ -1,8 +1,14 @@
+cn/bobdeng/base/PasswordDO.java
+ cn.bobdeng.base.PasswordDO
 cn/bobdeng/base/UserMobileTest.java
  cn.bobdeng.base.UserMobileTest
+cn/bobdeng/base/UserPasswordTest.java
+ cn.bobdeng.base.UserPasswordTest
 cn/bobdeng/base/UserTest.java
  cn.bobdeng.base.UserTest
 cn/bobdeng/base/UserMobileDO.java
  cn.bobdeng.base.UserMobileDO
+cn/bobdeng/base/UserPasswordRepositoryImpl.java
+ cn.bobdeng.base.UserPasswordRepositoryImpl
 cn/bobdeng/base/UserMobileRepositoryImpl.java
  cn.bobdeng.base.UserMobileRepositoryImpl

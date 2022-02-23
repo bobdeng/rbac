@@ -3,6 +3,8 @@ package cn.bobdeng.base;
 public class Users {
     public static UserRepository userRepository;
     public static UserMobileRepository userMobileRepository;
+    public static UserPasswordRepository userPasswordRepository;
+    public static PasswordEncoder passwordEncoder;
     private TenantId tenantId;
 
     public Users(TenantId tenantId) {

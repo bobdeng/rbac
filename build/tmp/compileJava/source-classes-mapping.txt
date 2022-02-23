@@ -4,10 +4,16 @@ cn/bobdeng/base/UserId.java
  cn.bobdeng.base.UserId
 cn/bobdeng/base/Mobile.java
  cn.bobdeng.base.Mobile
-cn/bobdeng/base/Users.java
- cn.bobdeng.base.Users
 cn/bobdeng/base/UserMobile.java
  cn.bobdeng.base.UserMobile
+cn/bobdeng/base/PasswordEncoder.java
+ cn.bobdeng.base.PasswordEncoder
+cn/bobdeng/base/Users.java
+ cn.bobdeng.base.Users
+cn/bobdeng/base/Password.java
+ cn.bobdeng.base.Password
+cn/bobdeng/base/UserPasswordRepository.java
+ cn.bobdeng.base.UserPasswordRepository
 cn/bobdeng/base/UserRepository.java
  cn.bobdeng.base.UserRepository
 cn/bobdeng/base/UserMobileRepository.java
