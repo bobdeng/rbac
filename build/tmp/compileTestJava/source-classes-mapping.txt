@@ -1,7 +1,7 @@
-cn/bobdeng/base/UserTest.java
- cn.bobdeng.base.UserTest
 cn/bobdeng/base/UserMobileTest.java
  cn.bobdeng.base.UserMobileTest
+cn/bobdeng/base/UserTest.java
+ cn.bobdeng.base.UserTest
 cn/bobdeng/base/UserMobileDO.java
  cn.bobdeng.base.UserMobileDO
 cn/bobdeng/base/UserMobileRepositoryImpl.java

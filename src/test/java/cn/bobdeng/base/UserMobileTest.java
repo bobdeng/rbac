@@ -25,7 +25,18 @@ public class UserMobileTest {
         user.bindMobile(new Mobile("13333334444"));
         List<UserMobileDO> mobiles = userMobileDao.all();
         assertThat(mobiles.size(), is(1));
-        assertThat(mobiles.get(0).getMobile(),is("13333334444"));
-        assertThat(mobiles.get(0).getUserId(),is(user.id()));
+        assertThat(mobiles.get(0).getMobile(), is("13333334444"));
+        assertThat(mobiles.get(0).getUserId(), is(user.id()));
+    }
+    @Test
+    public void should_not_save_mobile_when_user_has_mobile() {
+        String number = "13333334444";
+        User user = new User(new UserId("123456"));
+        Mobile mobile = new Mobile(number);
+        UserMobileDO userMobileDO=new UserMobileDO(user,mobile);
+        userMobileDao.save(userMobileDO);
+        user.bindMobile(mobile);
+        List<UserMobileDO> mobiles = userMobileDao.all();
+        assertThat(mobiles.size(), is(1));
     }
 }

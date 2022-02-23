@@ -2,6 +2,9 @@ package cn.bobdeng.base;
 
 import cn.bobdeng.dummydao.DummyDao;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class UserMobileRepositoryImpl implements UserMobileRepository {
     private final DummyDao<UserMobileDO, String> dummyDao;
 
@@ -10,7 +13,14 @@ public class UserMobileRepositoryImpl implements UserMobileRepository {
     }
 
     @Override
-    public void save(User user, UserMobile userMobile) {
-        dummyDao.save(new UserMobileDO(user,userMobile));
+    public void save(User user, Mobile userMobile) {
+        dummyDao.save(new UserMobileDO(user, userMobile));
+    }
+
+    @Override
+    public List<Mobile> findByUser(User user) {
+        return dummyDao.all()
+                .stream().filter(userMobileDO -> userMobileDO.getUserId().equals(user.id()))
+                .map(userMobileDO -> new Mobile(userMobileDO.getMobile())).collect(Collectors.toList());
     }
 }

@@ -1,5 +1,7 @@
 package cn.bobdeng.base;
 
+import static cn.bobdeng.base.Users.userMobileRepository;
+
 public class User {
     private UserId id;
 
@@ -20,6 +22,10 @@ public class User {
     }
 
     public void bindMobile(Mobile mobile) {
-        Users.userMobileRepository.save(this,new UserMobile(mobile));
+        if (userMobileRepository.findByUser(this)
+                .contains(mobile)) {
+            return;
+        }
+        userMobileRepository.save(this, mobile);
     }
 }

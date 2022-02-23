@@ -5,7 +5,7 @@ public class UserMobileDO {
     private String mobile;
     private String userId;
 
-    public UserMobileDO(User user, UserMobile userMobile) {
+    public UserMobileDO(User user, Mobile userMobile) {
         this.userId = user.id();
         this.mobile = userMobile.number();
     }
@@ -33,4 +33,5 @@ public class UserMobileDO {
     public void setUserId(String userId) {
         this.userId = userId;
     }
+
 }

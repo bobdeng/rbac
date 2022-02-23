@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="cn.bobdeng.base.UserMobileTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-02-23T07:16:04" hostname="dengzhiguodeMacBook-Pro.local" time="0.053">
+<testsuite name="cn.bobdeng.base.UserMobileTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-02-23T07:25:45" hostname="dengzhiguodeMacBook-Pro.local" time="0.059">
   <properties/>
-  <testcase name="should_save_mobile_when_user_has_no_mobile()" classname="cn.bobdeng.base.UserMobileTest" time="0.053"/>
+  <testcase name="should_save_mobile_when_user_has_no_mobile()" classname="cn.bobdeng.base.UserMobileTest" time="0.056"/>
+  <testcase name="should_not_save_mobile_when_user_has_mobile()" classname="cn.bobdeng.base.UserMobileTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
