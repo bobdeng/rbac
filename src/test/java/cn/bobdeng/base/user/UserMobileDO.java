@@ -1,8 +1,5 @@
 package cn.bobdeng.base.user;
 
-import cn.bobdeng.base.user.Mobile;
-import cn.bobdeng.base.user.User;
-
 public class UserMobileDO {
     private String id;
     private String mobile;

@@ -5,6 +5,7 @@ public class Users {
     public static UserMobileRepository userMobileRepository;
     public static UserPasswordRepository userPasswordRepository;
     public static PasswordEncoder passwordEncoder;
+    public static UserRoleRepository userRoleRepository;
     private TenantId tenantId;
 
     public Users(TenantId tenantId) {

@@ -1,5 +1,9 @@
 package cn.bobdeng.base.user;
 
+import cn.bobdeng.base.role.Function;
+import cn.bobdeng.base.role.Roles;
+
+import static cn.bobdeng.base.role.Roles.roleRepository;
 import static cn.bobdeng.base.user.Users.*;
 
 public class User {
@@ -66,5 +70,23 @@ public class User {
 
     public void active() {
         setStatus(UserStatus.active());
+    }
+
+    public void setRoles(UserRoles userRoles) {
+        UserRoleId userRoleId = userRoleRepository.findByUser(this).orElse(null);
+        if (userRoleId == null) {
+            userRoleRepository.save(this, userRoles);
+            return;
+        }
+        userRoleRepository.saveById(this, userRoleId, userRoles);
+    }
+
+    public boolean hasPermission(Function function) {
+        return userRoleRepository.findUserRoles(this).stream()
+                .flatMap(UserRoles::roles)
+                .flatMap(roleId -> roleRepository.findById(roleId).stream())
+                .filter(role -> role.hasPermission(function))
+                .findAny()
+                .isPresent();
     }
 }
