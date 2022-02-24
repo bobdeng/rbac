@@ -2,14 +2,23 @@ plugins {
     id 'java'
     id 'maven-publish'
 }
-group 'cn.bobdeng.base.rbac.domain'
+group 'cn.bobdeng.base'
 version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
     maven { url 'https://jitpack.io' }
 }
-
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = 'cn.bobdeng.base'
+            artifactId = 'rbac-domain'
+            version = '0.1'
+            from components.java
+        }
+    }
+}
 dependencies {
     compileOnly "org.projectlombok:lombok:1.18.20"
     implementation "com.google.code.gson:gson:2.8.5"
