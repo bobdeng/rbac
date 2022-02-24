@@ -1,8 +1,8 @@
 plugins {
     id 'java'
 }
-
-group 'cn.bobdeng.base'
+apply plugin: 'maven'
+group 'cn.bobdeng.base.rbac.domain'
 version '1.0-SNAPSHOT'
 
 repositories {
