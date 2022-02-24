@@ -50,7 +50,7 @@ public class UserRoleTest {
     @Test
     public void should_has_no_permission_when_has_no_role() {
         User user = User.create();
-        assertThat(user.hasPermission(new Function("function.name")), is(false));
+        assertThat(user.hasAnyPermission(new Function("function.name")), is(false));
     }
 
     @Test
@@ -68,6 +68,24 @@ public class UserRoleTest {
                 .id(roleId)
                 .build());
 
-        assertThat(user.hasPermission(new Function(functionName)), is(true));
+        assertThat(user.hasAnyPermission(new Function(functionName)), is(true));
+    }
+
+    @Test
+    public void should_has_permission_when_role_has_any_permission() {
+        String roleId = "role_id_123";
+        String functionName = "function.name";
+        User user = User.create();
+        userRoleDao.save(UserRoleDO.builder()
+                .userId(user.id())
+                .roles(new UserRoles(Arrays.asList(new RoleId(roleId))).rolesAsJson())
+                .build());
+        Functions functions = new Functions(Arrays.asList(new Function(functionName)));
+        roleDao.save(RoleDO.builder()
+                .functions(functions.asJson())
+                .id(roleId)
+                .build());
+
+        assertThat(user.hasAnyPermission(new Function(functionName)), is(true));
     }
 }

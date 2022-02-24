@@ -3,6 +3,7 @@ package cn.bobdeng.base.user;
 import cn.bobdeng.dummydao.DummyDao;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class UserMobileRepositoryImpl implements UserMobileRepository {
@@ -22,5 +23,10 @@ public class UserMobileRepositoryImpl implements UserMobileRepository {
         return dummyDao.all()
                 .stream().filter(userMobileDO -> userMobileDO.getUserId().equals(user.id()))
                 .map(userMobileDO -> new Mobile(userMobileDO.getMobile())).collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<UserId> findByMobile(Mobile mobile) {
+        return Optional.empty();
     }
 }

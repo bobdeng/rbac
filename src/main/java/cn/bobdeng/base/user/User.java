@@ -81,11 +81,11 @@ public class User {
         userRoleRepository.saveById(this, userRoleId, userRoles);
     }
 
-    public boolean hasPermission(Function function) {
+    public boolean hasAnyPermission(Function... functions) {
         return userRoleRepository.findUserRoles(this).stream()
                 .flatMap(UserRoles::roles)
                 .flatMap(roleId -> roleRepository.findById(roleId).stream())
-                .filter(role -> role.hasPermission(function))
+                .filter(role -> role.hasAnyPermission(functions))
                 .findAny()
                 .isPresent();
     }
