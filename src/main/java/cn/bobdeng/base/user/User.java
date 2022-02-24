@@ -90,4 +90,8 @@ public class User {
                 .flatMap(roleId -> roleRepository.findById(roleId).stream())
                 .anyMatch(role -> role.hasAnyPermission(functions));
     }
+
+    public String statusName() {
+        return status.status.getStatus();
+    }
 }

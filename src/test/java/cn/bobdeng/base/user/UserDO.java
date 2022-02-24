@@ -6,7 +6,7 @@ public class UserDO {
 
     public UserDO(User user) {
         this.id = user.id();
-        this.status = user.status().status.getStatus();
+        this.status = user.statusName();
     }
 
     public UserDO() {
