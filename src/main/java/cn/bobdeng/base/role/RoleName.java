@@ -1,5 +1,8 @@
 package cn.bobdeng.base.role;
 
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode
 public class RoleName {
     private String name;
 

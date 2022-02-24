@@ -2,12 +2,12 @@ package cn.bobdeng.base.user;
 
 import cn.bobdeng.base.role.RoleId;
 import com.google.gson.Gson;
+import lombok.EqualsAndHashCode;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Stream;
-
+@EqualsAndHashCode
 public class UserRoles {
     private List<RoleId> roleIdList;
 

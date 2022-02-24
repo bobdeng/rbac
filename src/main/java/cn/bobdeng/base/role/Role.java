@@ -1,7 +1,9 @@
 package cn.bobdeng.base.role;
 
-import java.util.stream.Stream;
+import lombok.EqualsAndHashCode;
 
+import java.util.stream.Stream;
+@EqualsAndHashCode
 public class Role {
     private RoleId id;
     private RoleName name;

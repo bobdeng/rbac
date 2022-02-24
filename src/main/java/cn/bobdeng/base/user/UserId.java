@@ -1,7 +1,9 @@
 package cn.bobdeng.base.user;
 
-import java.util.UUID;
+import lombok.EqualsAndHashCode;
 
+import java.util.UUID;
+@EqualsAndHashCode
 public class UserId {
     private String id;
 

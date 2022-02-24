@@ -2,11 +2,13 @@ package cn.bobdeng.base.role;
 
 import com.google.gson.Gson;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Arrays;
 import java.util.List;
 
 @Data
+@EqualsAndHashCode
 public class Functions {
     private List<Function> functionList;
 

@@ -2,10 +2,11 @@ package cn.bobdeng.base.user;
 
 import cn.bobdeng.base.role.Function;
 import cn.bobdeng.base.role.Roles;
+import lombok.EqualsAndHashCode;
 
 import static cn.bobdeng.base.role.Roles.roleRepository;
 import static cn.bobdeng.base.user.Users.*;
-
+@EqualsAndHashCode
 public class User {
     private UserId id;
     private UserStatus status;

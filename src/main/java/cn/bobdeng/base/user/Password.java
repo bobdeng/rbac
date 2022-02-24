@@ -1,9 +1,12 @@
 package cn.bobdeng.base.user;
 
 
+import lombok.EqualsAndHashCode;
+
 import java.util.Objects;
 
 import static cn.bobdeng.base.user.Users.*;
+@EqualsAndHashCode
 public class Password {
     private String rawPassword;
 

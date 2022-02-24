@@ -1,7 +1,9 @@
 package cn.bobdeng.base.user;
 
-import java.util.Objects;
+import lombok.EqualsAndHashCode;
 
+import java.util.Objects;
+@EqualsAndHashCode
 public class EncodedPassword {
     private String encoded;
 

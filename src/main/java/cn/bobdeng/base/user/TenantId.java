@@ -1,5 +1,8 @@
 package cn.bobdeng.base.user;
 
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode
 public class TenantId {
     private String id;
 

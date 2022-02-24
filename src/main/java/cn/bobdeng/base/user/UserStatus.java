@@ -1,7 +1,10 @@
 package cn.bobdeng.base.user;
 
+import lombok.EqualsAndHashCode;
+
 import java.util.Objects;
 
+@EqualsAndHashCode
 public class UserStatus {
     UserStatusEnum status;
 
