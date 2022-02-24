@@ -27,6 +27,9 @@ public class UserMobileRepositoryImpl implements UserMobileRepository {
 
     @Override
     public Optional<UserId> findByMobile(Mobile mobile) {
-        return Optional.empty();
+        return dummyDao.all().stream()
+                .filter(userMobileDO -> userMobileDO.getMobile().equals(mobile.number()))
+                .map(userMobileDO -> new UserId(userMobileDO.getUserId()))
+                .findFirst();
     }
 }

@@ -37,6 +37,9 @@ public class User {
         if (userMobileRepository.findByUser(this).contains(mobile)) {
             return;
         }
+        if (userMobileRepository.findByMobile(mobile).isPresent()) {
+            throw new MobileIsUsedByOtherException();
+        }
         userMobileRepository.save(this, mobile);
     }
 
