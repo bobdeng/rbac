@@ -33,4 +33,8 @@ public class Role {
         return Stream.of(functions)
                 .anyMatch(function -> this.functions.hasPermission(function));
     }
+
+    public String id() {
+        return id.id();
+    }
 }
