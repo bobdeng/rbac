@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'maven-publish'
 }
 group 'cn.bobdeng.base.rbac.domain'
 version '1.0-SNAPSHOT'
