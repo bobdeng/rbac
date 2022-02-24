@@ -1,5 +1,6 @@
 package cn.bobdeng.base.role;
 
+import cn.bobdeng.base.user.TenantId;
 import cn.bobdeng.dummydao.DummyDao;
 import cn.bobdeng.dummydao.UUIDGeneratorImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +32,22 @@ public class RoleTest {
         Role role = roles.newRole(roleName, functions);
 
         assertThat(role, notNullValue());
-        assertThat(roleDao.all().size(),is(1));
+        assertThat(roleDao.all().size(), is(1));
+    }
+
+    @Test
+    public void should_has_one_role_when_save_role_with_tenant() {
+        TenantId tenantId = new TenantId("123456");
+        Roles roles = new Roles(tenantId);
+        RoleName roleName = new RoleName("角色名称");
+        List<Function> functionList = Arrays.asList(new Function("function.1"));
+        Functions functions = new Functions(functionList);
+
+        Role role = roles.newRole(roleName, functions);
+
+        assertThat(role, notNullValue());
+        assertThat(roleDao.all().size(), is(1));
+        assertThat(roleDao.all().get(0).getTenantId(),is(tenantId.getId()));
     }
 
 }

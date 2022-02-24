@@ -29,11 +29,7 @@ public class Role {
         return functions.asJson();
     }
 
-    public boolean hasPermission(Function function) {
-        return functions.hasPermission(function);
-    }
-
-    public boolean hasAnyPermission(Function[] functions) {
+    public boolean hasAnyPermission(Function... functions) {
         return Stream.of(functions)
                 .anyMatch(function -> this.functions.hasPermission(function));
     }

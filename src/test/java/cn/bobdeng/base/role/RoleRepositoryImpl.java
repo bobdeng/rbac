@@ -17,6 +17,7 @@ public class RoleRepositoryImpl implements RoleRepository {
         roleDao.save(RoleDO.builder()
                 .functions(role.functionsAsJson())
                 .name(role.name())
+                .tenantId(roles.tenantId())
                 .build());
     }
 

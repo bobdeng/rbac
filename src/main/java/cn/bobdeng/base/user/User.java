@@ -85,8 +85,6 @@ public class User {
         return userRoleRepository.findUserRoles(this).stream()
                 .flatMap(UserRoles::roles)
                 .flatMap(roleId -> roleRepository.findById(roleId).stream())
-                .filter(role -> role.hasAnyPermission(functions))
-                .findAny()
-                .isPresent();
+                .anyMatch(role -> role.hasAnyPermission(functions));
     }
 }
