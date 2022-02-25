@@ -25,6 +25,7 @@ public class UserTest {
         assertThat(user.status(), is(UserStatus.active()));
         assertThat(user.statusName(), is(UserStatus.active().statusName()));
         assertThat(userDao.all().size(), is(1));
+        assertThat(userDao.all().get(0).getLevel(), is("user"));
         assertThat(user.isAdmin(),is(false));
     }
 
@@ -33,6 +34,7 @@ public class UserTest {
         Users users = new Users();
         User user = users.newAdmin();
         assertThat(userDao.all().size(), is(1));
+        assertThat(userDao.all().get(0).getLevel(), is("admin"));
         assertThat(user.isAdmin(),is(true));
     }
 

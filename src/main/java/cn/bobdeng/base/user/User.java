@@ -19,6 +19,12 @@ public class User {
         this.status = status;
     }
 
+    public User(UserId id, UserStatus status, UserLevel level) {
+        this.id = id;
+        this.status = status;
+        this.level = level;
+    }
+
     public static User create() {
         return newUser(UserLevel.normal());
     }
@@ -111,5 +117,9 @@ public class User {
 
     public boolean isAdmin() {
         return level.isAdmin();
+    }
+
+    public String levelName() {
+        return this.level.name();
     }
 }

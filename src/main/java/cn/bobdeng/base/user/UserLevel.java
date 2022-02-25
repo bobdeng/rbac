@@ -17,7 +17,15 @@ public class UserLevel {
         return new UserLevel(LEVEL_USER);
     }
 
+    public static UserLevel of(String level) {
+        return new UserLevel(level);
+    }
+
     public boolean isAdmin() {
         return this.level.equals(LEVEL_ADMIN);
+    }
+
+    public String name() {
+        return level;
     }
 }
