@@ -1,9 +1,12 @@
 package cn.bobdeng.base.role;
 
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 import java.util.stream.Stream;
+
 @EqualsAndHashCode
+@Getter
 public class Role {
     private RoleId id;
     private RoleName name;
@@ -16,11 +19,7 @@ public class Role {
     }
 
     public static Role create(RoleName name, Functions functions) {
-        return new Role(RoleId.create(),name,functions);
-    }
-
-    public Functions functions() {
-        return functions;
+        return new Role(RoleId.create(), name, functions);
     }
 
     public String name() {

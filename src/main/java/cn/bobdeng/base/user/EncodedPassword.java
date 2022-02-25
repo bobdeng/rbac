@@ -1,8 +1,6 @@
 package cn.bobdeng.base.user;
 
 import lombok.EqualsAndHashCode;
-
-import java.util.Objects;
 @EqualsAndHashCode
 public class EncodedPassword {
     private String encoded;
@@ -13,17 +11,5 @@ public class EncodedPassword {
 
     public boolean match(Password password) {
         return Users.passwordEncoder.verify(password,this);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        EncodedPassword that = (EncodedPassword) o;
-        return Objects.equals(encoded, that.encoded);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(encoded);
     }
 }

@@ -3,9 +3,7 @@ package cn.bobdeng.base.user;
 
 import lombok.EqualsAndHashCode;
 
-import java.util.Objects;
-
-import static cn.bobdeng.base.user.Users.*;
+import static cn.bobdeng.base.user.Users.passwordEncoder;
 @EqualsAndHashCode
 public class Password {
     private String rawPassword;
@@ -18,15 +16,4 @@ public class Password {
         return passwordEncoder.encode(rawPassword);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        Password password = (Password) o;
-        return Objects.equals(rawPassword, password.rawPassword);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(rawPassword);
-    }
 }
