@@ -41,4 +41,4 @@ test {
     finalizedBy jacocoTestReport // report is always generated after tests run
 }
 
-apply from: "$rootDir/gradle/config/script/coverage.gradle"
+apply from: "$rootDir/gradle/config/script/coverage-all.gradle"
