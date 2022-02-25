@@ -3,6 +3,7 @@ package cn.bobdeng.base.role;
 import cn.bobdeng.dummydao.DummyDao;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -32,7 +33,9 @@ public record RoleRepositoryImpl(DummyDao<RoleDO, String> roleDao) implements Ro
     @Override
     public List<Role> list(Roles roles) {
         return roleDao.all()
-                .stream().map(this::getRole)
+                .stream()
+                .filter(roleDO -> Objects.equals(roleDO.getTenantId(), roles.tenantId()))
+                .map(this::getRole)
                 .collect(Collectors.toList());
     }
 }
