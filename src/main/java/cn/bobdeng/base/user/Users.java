@@ -31,4 +31,10 @@ public class Users {
         }
         return this.tenantId.getId();
     }
+
+    public User newAdmin() {
+        User user = User.createAdmin();
+        userRepository.save(this, user);
+        return user;
+    }
 }

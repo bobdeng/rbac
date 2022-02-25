@@ -2,13 +2,17 @@ package cn.bobdeng.base.user;
 
 import cn.bobdeng.base.role.Function;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 import static cn.bobdeng.base.role.Roles.roleRepository;
 import static cn.bobdeng.base.user.Users.*;
+
 @EqualsAndHashCode
+@Getter
 public class User {
     private UserId id;
     private UserStatus status;
+    private UserLevel level;
 
     public User(UserId id, UserStatus status) {
         this.id = id;
@@ -16,13 +20,23 @@ public class User {
     }
 
     public static User create() {
-        User user = new User(UserId.create());
-        user.status = UserStatus.active();
-        return user;
+        return newUser(UserLevel.normal());
     }
 
     public User(UserId id) {
         this.id = id;
+    }
+
+    public static User createAdmin() {
+        UserLevel level = UserLevel.admin();
+        return newUser(level);
+    }
+
+    private static User newUser(UserLevel level) {
+        User user = new User(UserId.create());
+        user.status = UserStatus.active();
+        user.level = level;
+        return user;
     }
 
     public UserId getId() {
@@ -93,5 +107,9 @@ public class User {
 
     public String statusName() {
         return status.statusName();
+    }
+
+    public boolean isAdmin() {
+        return level.isAdmin();
     }
 }

@@ -25,6 +25,15 @@ public class UserTest {
         assertThat(user.status(), is(UserStatus.active()));
         assertThat(user.statusName(), is(UserStatus.active().statusName()));
         assertThat(userDao.all().size(), is(1));
+        assertThat(user.isAdmin(),is(false));
+    }
+
+    @Test
+    public void should_is_admin_when_create_admin() {
+        Users users = new Users();
+        User user = users.newAdmin();
+        assertThat(userDao.all().size(), is(1));
+        assertThat(user.isAdmin(),is(true));
     }
 
     @Test
