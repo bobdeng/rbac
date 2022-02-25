@@ -14,11 +14,6 @@ public class User {
     private UserStatus status;
     private UserLevel level;
 
-    public User(UserId id, UserStatus status) {
-        this.id = id;
-        this.status = status;
-    }
-
     public User(UserId id, UserStatus status, UserLevel level) {
         this.id = id;
         this.status = status;
