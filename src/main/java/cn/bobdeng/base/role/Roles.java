@@ -2,6 +2,7 @@ package cn.bobdeng.base.role;
 
 import cn.bobdeng.base.user.TenantId;
 
+import java.util.List;
 import java.util.Optional;
 
 public class Roles {
@@ -24,5 +25,9 @@ public class Roles {
 
     public String tenantId() {
         return Optional.ofNullable(this.tenantId).map(TenantId::getId).orElse(null);
+    }
+
+    public List<Role> list() {
+        return roleRepository.list(this);
     }
 }

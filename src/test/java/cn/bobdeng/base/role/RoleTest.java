@@ -47,7 +47,21 @@ public class RoleTest {
 
         assertThat(role, notNullValue());
         assertThat(roleDao.all().size(), is(1));
-        assertThat(roleDao.all().get(0).getTenantId(),is(tenantId.getId()));
+        assertThat(roleDao.all().get(0).getTenantId(), is(tenantId.getId()));
+    }
+
+    @Test
+    public void list_all_no_tenant() {
+        Roles roles = new Roles();
+        RoleName roleName = new RoleName("角色名称");
+        List<Function> functionList = Arrays.asList(new Function("function.1"));
+        Functions functions = new Functions(functionList);
+        roles.newRole(roleName, functions);
+
+        List<Role> list = roles.list();
+
+        assertThat(list.size(), is(1));
+
     }
 
 }
