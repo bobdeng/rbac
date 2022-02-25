@@ -10,6 +10,8 @@ repositories {
     mavenCentral()
     maven { url 'https://jitpack.io' }
 }
+apply from: "$rootDir/gradle/config/script/style.gradle"
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -38,6 +40,5 @@ test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport // report is always generated after tests run
 }
-jacocoTestReport {
-    dependsOn test // tests are required to run before generating the report
-}
+
+apply from: "$rootDir/gradle/config/script/coverage.gradle"

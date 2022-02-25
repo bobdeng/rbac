@@ -16,7 +16,7 @@ public class UserRepositoryImpl implements UserRepository {
     public User save(Users users, User user) {
         UserDO userDO = new UserDO();
         userDO.setId(user.id());
-        userDO.setStatus(user.status().status.getStatus());
+        userDO.setStatus(user.status().statusName());
         userDao.save(userDO);
         return user;
     }
@@ -33,7 +33,7 @@ public class UserRepositoryImpl implements UserRepository {
     public void save(User user) {
         UserDO userDO = new UserDO();
         userDO.setId(user.id());
-        userDO.setStatus(user.status().status.getStatus());
+        userDO.setStatus(user.status().statusName());
         userDao.save(userDO);
     }
 }

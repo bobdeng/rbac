@@ -23,7 +23,7 @@ public class UserTest {
         User user = users.newUser();
         assertThat(user.id(), notNullValue());
         assertThat(user.status(), is(UserStatus.active()));
-        assertThat(user.statusName(), is(UserStatus.active().status.getStatus()));
+        assertThat(user.statusName(), is(UserStatus.active().statusName()));
         assertThat(userDao.all().size(), is(1));
     }
 

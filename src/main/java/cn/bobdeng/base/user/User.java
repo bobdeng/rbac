@@ -1,7 +1,6 @@
 package cn.bobdeng.base.user;
 
 import cn.bobdeng.base.role.Function;
-import cn.bobdeng.base.role.Roles;
 import lombok.EqualsAndHashCode;
 
 import static cn.bobdeng.base.role.Roles.roleRepository;
@@ -93,6 +92,6 @@ public class User {
     }
 
     public String statusName() {
-        return status.status.getStatus();
+        return status.statusName();
     }
 }

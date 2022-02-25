@@ -1,6 +1,7 @@
 package cn.bobdeng.base.user;
 
 import lombok.EqualsAndHashCode;
+
 @EqualsAndHashCode
 public class EncodedPassword {
     private String encoded;
@@ -10,6 +11,6 @@ public class EncodedPassword {
     }
 
     public boolean match(Password password) {
-        return Users.passwordEncoder.verify(password,this);
+        return Users.passwordEncoder.verify(password, this);
     }
 }

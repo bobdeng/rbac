@@ -3,7 +3,7 @@ package cn.bobdeng.base.user;
 import java.util.stream.Stream;
 
 public enum UserStatusEnum {
-    active("active"),suspend("suspend"),deleted("deleted");
+    active("active"), suspend("suspend"), deleted("deleted");
 
     private String status;
 

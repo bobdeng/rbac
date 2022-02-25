@@ -4,7 +4,7 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode
 public class UserStatus {
-    UserStatusEnum status;
+    private UserStatusEnum status;
 
     public UserStatus(UserStatusEnum status) {
         this.status = status;
@@ -26,4 +26,7 @@ public class UserStatus {
         return new UserStatus(UserStatusEnum.deleted);
     }
 
+    public String statusName() {
+        return status.getStatus();
+    }
 }
