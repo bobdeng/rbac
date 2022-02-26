@@ -4,8 +4,6 @@ import cn.bobdeng.base.role.Function;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
-import java.util.Optional;
-
 import static cn.bobdeng.base.role.Roles.roleRepository;
 import static cn.bobdeng.base.user.Users.*;
 
@@ -16,10 +14,6 @@ public class User {
     private UserStatus status;
     private UserLevel level;
     private UserName name;
-
-    public User(UserId id, UserStatus status, UserLevel level) {
-        this(id, status, level, UserName.empty());
-    }
 
     public User(UserId id, UserStatus status, UserLevel level, UserName name) {
         this.id = id;
@@ -40,21 +34,9 @@ public class User {
         this.id = id;
     }
 
-    public static User createAdmin() {
-        UserLevel level = UserLevel.admin();
-        return newUser(level);
-    }
-
     public static User createAdmin(UserName name) {
         UserLevel level = UserLevel.admin();
         return newUser(level, name);
-    }
-
-    private static User newUser(UserLevel level) {
-        User user = new User(UserId.create());
-        user.status = UserStatus.active();
-        user.level = level;
-        return user;
     }
 
     private static User newUser(UserLevel level, UserName name) {
@@ -144,6 +126,6 @@ public class User {
     }
 
     public String name() {
-        return Optional.ofNullable(name).map(UserName::getName).orElse(null);
+        return name.getName();
     }
 }
