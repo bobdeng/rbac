@@ -128,4 +128,13 @@ public class User {
     public String name() {
         return name.getName();
     }
+
+    public void bindAccount(Account account) {
+        if (accountRepository.findUserByAccount(account)
+                .filter(userId -> !userId.equals(this.id))
+                .isPresent()) {
+            throw new DuplicateAccountException();
+        }
+        accountRepository.save(this, account);
+    }
 }

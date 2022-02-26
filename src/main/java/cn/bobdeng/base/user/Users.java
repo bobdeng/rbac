@@ -8,6 +8,7 @@ public class Users {
     public static UserPasswordRepository userPasswordRepository;
     public static PasswordEncoder passwordEncoder;
     public static UserRoleRepository userRoleRepository;
+    public static UserAccountRepository accountRepository;
     private TenantId tenantId;
 
     public Users(TenantId tenantId) {
