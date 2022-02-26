@@ -20,7 +20,11 @@ public class Users {
     }
 
     public User newUser() {
-        User user = User.create();
+        return this.newUser(UserName.empty());
+    }
+
+    public User newUser(UserName name) {
+        User user = User.create(name);
         userRepository.save(this, user);
         return user;
     }
@@ -33,7 +37,11 @@ public class Users {
     }
 
     public User newAdmin() {
-        User user = User.createAdmin();
+        return this.newAdmin(UserName.empty());
+    }
+
+    public User newAdmin(UserName name) {
+        User user = User.createAdmin(name);
         userRepository.save(this, user);
         return user;
     }

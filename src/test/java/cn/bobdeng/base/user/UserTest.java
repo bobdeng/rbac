@@ -26,7 +26,7 @@ public class UserTest {
         assertThat(user.statusName(), is(UserStatus.active().statusName()));
         assertThat(userDao.all().size(), is(1));
         assertThat(userDao.all().get(0).getLevel(), is("user"));
-        assertThat(user.isAdmin(),is(false));
+        assertThat(user.isAdmin(), is(false));
     }
 
     @Test
@@ -35,16 +35,17 @@ public class UserTest {
         User user = users.newAdmin();
         assertThat(userDao.all().size(), is(1));
         assertThat(userDao.all().get(0).getLevel(), is("admin"));
-        assertThat(user.isAdmin(),is(true));
+        assertThat(user.isAdmin(), is(true));
     }
 
     @Test
     public void should_create_user_with_tenant() {
         TenantId tenant = TenantId.of("123");
         Users users = Users.ofTenant(tenant);
-        User user = users.newUser();
+        User user = users.newUser(new UserName("张三"));
         assertThat(user.getId(), notNullValue());
         assertThat(userDao.all().size(), is(1));
+        assertThat(userDao.all().get(0).getName(), is("张三"));
     }
 
     @Test
@@ -62,7 +63,7 @@ public class UserTest {
 
     @Test
     public void should_suspend_when_user_is_suspend() {
-        UserDO userDO = new UserDO(User.create());
+        UserDO userDO = new UserDO(User.create(UserName.empty()));
         userDao.save(userDO);
         User user = Users.userRepository.findById(userDO.getId()).orElse(null);
 
@@ -74,7 +75,7 @@ public class UserTest {
 
     @Test
     public void should_deleted_when_user_is_delete() {
-        UserDO userDO = new UserDO(User.create());
+        UserDO userDO = new UserDO(User.create(UserName.empty()));
         userDao.save(userDO);
         User user = Users.userRepository.findById(userDO.getId()).orElse(null);
 
@@ -86,7 +87,7 @@ public class UserTest {
 
     @Test
     public void should_active_when_user_is_active() {
-        UserDO userDO = new UserDO(User.create());
+        UserDO userDO = new UserDO(User.create(UserName.empty()));
         userDO.setStatus(UserStatusEnum.suspend.getStatus());
         userDao.save(userDO);
         User user = Users.userRepository.findById(userDO.getId()).orElse(null);
