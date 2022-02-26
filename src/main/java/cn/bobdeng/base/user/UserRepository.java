@@ -1,5 +1,6 @@
 package cn.bobdeng.base.user;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository {
@@ -8,4 +9,6 @@ public interface UserRepository {
     Optional<User> findById(String id);
 
     void save(User user);
+
+    List<User> all(Users users);
 }

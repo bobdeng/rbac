@@ -5,6 +5,8 @@ import cn.bobdeng.dummydao.UUIDGeneratorImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -96,5 +98,17 @@ public class UserTest {
 
         UserDO savedUserDO = userDao.findById(userDO.getId()).orElse(null);
         assertThat(savedUserDO.getStatus(), is(UserStatusEnum.active.getStatus()));
+    }
+
+    @Test
+    public void list_user_by_name() {
+        UserDO userDO = new UserDO(User.create(new UserName("张三")));
+        userDO.setStatus(UserStatusEnum.suspend.getStatus());
+        userDao.save(userDO);
+
+        List<User> users = new Users().list();
+
+        assertThat(users, notNullValue());
+        assertThat(users.size(), is(1));
     }
 }

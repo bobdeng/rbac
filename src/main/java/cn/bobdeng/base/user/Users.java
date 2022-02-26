@@ -1,5 +1,7 @@
 package cn.bobdeng.base.user;
 
+import java.util.List;
+
 public class Users {
     public static UserRepository userRepository;
     public static UserMobileRepository userMobileRepository;
@@ -44,5 +46,9 @@ public class Users {
         User user = User.createAdmin(name);
         userRepository.save(this, user);
         return user;
+    }
+
+    public List<User> list() {
+        return userRepository.all(this);
     }
 }
