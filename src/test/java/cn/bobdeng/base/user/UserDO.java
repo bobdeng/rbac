@@ -6,6 +6,7 @@ import lombok.Getter;
 @Data
 public class UserDO {
     private String id;
+    private String tenantId;
     private String status;
     private String level;
     private String name;
@@ -15,6 +16,7 @@ public class UserDO {
         this.status = user.statusName();
         this.level = user.levelName();
         this.name = user.name();
+        this.tenantId = null;
     }
 
     public UserDO() {

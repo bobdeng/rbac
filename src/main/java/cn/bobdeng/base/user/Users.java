@@ -1,6 +1,7 @@
 package cn.bobdeng.base.user;
 
 import java.util.List;
+import java.util.Optional;
 
 public class Users {
     public static UserRepository userRepository;
@@ -51,5 +52,9 @@ public class Users {
 
     public List<User> list() {
         return userRepository.all(this);
+    }
+
+    public Optional<User> findUserById(UserId id) {
+        return userRepository.findById(tenantId, id);
     }
 }

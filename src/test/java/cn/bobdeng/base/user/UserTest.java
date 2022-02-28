@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -67,7 +68,7 @@ public class UserTest {
     public void should_suspend_when_user_is_suspend() {
         UserDO userDO = new UserDO(User.create(UserName.empty()));
         userDao.save(userDO);
-        User user = Users.userRepository.findById(userDO.getId()).orElse(null);
+        User user = Users.userRepository.findById(null,UserId.of(userDO.getId())).orElse(null);
 
         user.suspend();
 
@@ -79,7 +80,7 @@ public class UserTest {
     public void should_deleted_when_user_is_delete() {
         UserDO userDO = new UserDO(User.create(UserName.empty()));
         userDao.save(userDO);
-        User user = Users.userRepository.findById(userDO.getId()).orElse(null);
+        User user = Users.userRepository.findById(null,UserId.of(userDO.getId())).orElse(null);
 
         user.remove();
 
@@ -92,7 +93,7 @@ public class UserTest {
         UserDO userDO = new UserDO(User.create(UserName.empty()));
         userDO.setStatus(UserStatusEnum.suspend.getStatus());
         userDao.save(userDO);
-        User user = Users.userRepository.findById(userDO.getId()).orElse(null);
+        User user = Users.userRepository.findById(null,UserId.of(userDO.getId())).orElse(null);
 
         user.active();
 
@@ -110,5 +111,16 @@ public class UserTest {
 
         assertThat(users, notNullValue());
         assertThat(users.size(), is(1));
+    }
+
+    @Test
+    public void find_user_by_id() {
+        UserDO userDO = new UserDO(User.create(new UserName("张三")));
+        userDO.setStatus(UserStatusEnum.suspend.getStatus());
+        userDao.save(userDO);
+
+        User user = new Users().findUserById(UserId.of(userDO.getId())).orElseThrow();
+
+        assertThat(user, notNullValue());
     }
 }

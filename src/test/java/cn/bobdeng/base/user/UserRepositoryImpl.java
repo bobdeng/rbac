@@ -3,6 +3,7 @@ package cn.bobdeng.base.user;
 import cn.bobdeng.dummydao.DummyDao;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -21,14 +22,20 @@ public class UserRepositoryImpl implements UserRepository {
         userDO.setStatus(user.status().statusName());
         userDO.setLevel(user.levelName());
         userDO.setName(user.name());
+        userDO.setTenantId(users.tenantId());
         userDao.save(userDO);
         return user;
     }
 
     @Override
-    public Optional<User> findById(String id) {
-        return userDao.findById(id)
-                .map(this::toEntity);
+    public Optional<User> findById(TenantId tenantId, UserId userId) {
+        String tenant = tenantId != null ? tenantId.getId() : null;
+        return userDao.all()
+                .stream().filter(
+                        userDO -> Objects.equals(userDO.getTenantId(), tenant)
+                ).filter(userDO -> Objects.equals(userDO.getId(), userId.getId()))
+                .map(this::toEntity)
+                .findFirst();
     }
 
     private User toEntity(UserDO userDO) {
@@ -41,7 +48,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void save(User user) {
-        UserDO userDO = new UserDO();
+        UserDO userDO = userDao.findById(user.id()).orElseThrow();
         userDO.setId(user.id());
         userDO.setStatus(user.status().statusName());
         userDO.setLevel(user.levelName());
