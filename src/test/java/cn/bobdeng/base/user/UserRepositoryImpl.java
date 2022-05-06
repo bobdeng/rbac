@@ -2,6 +2,9 @@ package cn.bobdeng.base.user;
 
 import cn.bobdeng.dummydao.DummyDao;
 
+import java.util.Objects;
+import java.util.Optional;
+
 public class UserRepositoryImpl implements UserRepository {
     private final DummyDao<UserDO, Integer> dummyDao;
 
@@ -10,7 +13,8 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void save(UserDO userDO) {
-        dummyDao.save(userDO);
+    public UserDO save(UserDO userDO) {
+        return dummyDao.save(userDO);
     }
+
 }

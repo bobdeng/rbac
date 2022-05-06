@@ -3,10 +3,11 @@ package cn.bobdeng.base.user;
 import cn.bobdeng.base.TenantId;
 import cn.bobdeng.dummydao.AutoIntegerIdGenerator;
 import cn.bobdeng.dummydao.DummyDao;
-import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class UserTest {
@@ -20,15 +21,17 @@ public class UserTest {
     }
 
     @Test
-    public void should_create_user() {
-        NewUserRequest newUserRequest = new NewUserRequest("123456", "bob");
+    public void should_create_user() throws UserAlreadyExistException {
+        NewUserRequest newUserRequest = new NewUserRequest("bob");
         Users users = new Users(new TenantId("1111"));
-        users.newUser(newUserRequest, userRepository);
 
-        assertThat(dummyDao.all().size(), CoreMatchers.is(1));
+        User user = users.newUser(newUserRequest, userRepository);
+
+        assertThat(user.id(), notNullValue());
+        assertThat(dummyDao.all().size(), is(1));
         UserDO userDO = dummyDao.all().get(0);
-        assertThat(userDO.getUserId(), CoreMatchers.is("123456"));
-        assertThat(userDO.getName(), CoreMatchers.is("bob"));
-        assertThat(userDO.getTenantId(), CoreMatchers.is("1111"));
+        assertThat(userDO.getName(), is("bob"));
+        assertThat(userDO.getTenantId(), is("1111"));
     }
+
 }

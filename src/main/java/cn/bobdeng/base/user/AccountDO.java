@@ -6,25 +6,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "rbac_user")
+@Table(name = "rbac_account")
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
-public class UserDO {
+public class AccountDO {
     @Id
-    @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
     private int id;
-    private String tenantId;
     private String name;
+    private String tenantId;
 
-    public UserDO(Users users, User user) {
-        this.name = user.name();
-        this.tenantId = users.tenantId();
+    public AccountDO(User user, Account account) {
+        this.id = user.id();
+        this.tenantId = user.tenantId();
+        this.name = account.name();
     }
 }

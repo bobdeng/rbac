@@ -1,13 +1,13 @@
 package cn.bobdeng.base.user;
 
 public class UserId {
-    private String id;
+    private Integer id;
 
-    public UserId(String id) {
+    public UserId(int id) {
         this.id = id;
     }
 
-    public String id() {
+    public Integer id() {
         return id;
     }
 }

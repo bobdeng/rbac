@@ -2,15 +2,13 @@ package cn.bobdeng.base.user;
 
 
 public class NewUserRequest {
-    private String id;
     private String name;
 
-    public NewUserRequest(String id, String name) {
-        this.id = id;
+    public NewUserRequest(String name) {
         this.name = name;
     }
 
     public User toUser() {
-        return new User(new UserId(id), new UserName(name));
+        return new User(new UserName(name));
     }
 }

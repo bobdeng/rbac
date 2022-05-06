@@ -10,9 +10,10 @@ public class Users {
         this.tenantId = tenantId;
     }
 
-    public void newUser(NewUserRequest newUserRequest, UserRepository userRepository) {
+    public User newUser(NewUserRequest newUserRequest, UserRepository userRepository) throws UserAlreadyExistException {
         User user = newUserRequest.toUser();
-        userRepository.save(new UserDO(this, user));
+        UserDO userDO = userRepository.save(new UserDO(this, user));
+        return new User(userDO);
     }
 
     public String tenantId() {
