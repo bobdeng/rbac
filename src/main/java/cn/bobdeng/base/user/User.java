@@ -3,12 +3,10 @@ package cn.bobdeng.base.user;
 import cn.bobdeng.base.TenantId;
 import cn.bobdeng.base.role.Role;
 import cn.bobdeng.base.role.RoleName;
-import cn.bobdeng.base.role.RoleRepository;
 import lombok.Getter;
 
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class User {
@@ -54,8 +52,8 @@ public class User {
         return tenantId.id();
     }
 
-    public void setPassword(Password password, PasswordRepository passwordRepository, PasswordEncoder passwordEncoder) {
-        passwordRepository.save(new PasswordDO(this, password, passwordEncoder));
+    public void setPassword(Password password, PasswordRepository passwordRepository) {
+        passwordRepository.save(new PasswordDO(this, password, passwordRepository.passwordEncoder()));
     }
 
     public boolean verifyPassword(Password password, PasswordRepository passwordRepository, PasswordEncoder passwordEncoder) {

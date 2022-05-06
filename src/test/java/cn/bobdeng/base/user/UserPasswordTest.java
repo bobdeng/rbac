@@ -2,7 +2,6 @@ package cn.bobdeng.base.user;
 
 import cn.bobdeng.dummydao.AutoIntegerIdGenerator;
 import cn.bobdeng.dummydao.DummyDao;
-import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +16,7 @@ public class UserPasswordTest {
     public void setup() {
         dummyDao = new DummyDao<>(PasswordDO.class, "id", new AutoIntegerIdGenerator());
         passwordRepository = new PasswordRepositoryImpl(dummyDao);
+        passwordRepository.setPasswordEncoder(new PasswordEncoderImpl());
     }
 
     @Test
@@ -24,7 +24,7 @@ public class UserPasswordTest {
         Password userPassword = new Password("123456");
         User user = new User(new UserId(1), null);
 
-        user.setPassword(userPassword, passwordRepository, new PasswordEncoderImpl());
+        user.setPassword(userPassword, passwordRepository);
 
         assertThat(dummyDao.all().size(), is(1));
         PasswordDO passwordDO = dummyDao.all().get(0);
@@ -35,7 +35,7 @@ public class UserPasswordTest {
         Password userPassword = new Password("123456");
         User user = new User(new UserId(1), null);
 
-        user.setPassword(userPassword, passwordRepository, new PasswordEncoderImpl());
+        user.setPassword(userPassword, passwordRepository);
 
         assertThat(user.verifyPassword(new Password("123456"), passwordRepository, new PasswordEncoderImpl()), is(true));
         assertThat(user.verifyPassword(new Password("123455"), passwordRepository, new PasswordEncoderImpl()), is(false));
