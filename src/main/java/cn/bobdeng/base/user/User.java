@@ -1,7 +1,15 @@
 package cn.bobdeng.base.user;
 
 import cn.bobdeng.base.TenantId;
+import cn.bobdeng.base.role.Role;
+import cn.bobdeng.base.role.RoleName;
+import cn.bobdeng.base.role.RoleRepository;
 import lombok.Getter;
+
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class User {
     @Getter
@@ -54,5 +62,23 @@ public class User {
         return passwordRepository.findByUser(this)
                 .map(PasswordDO::password)
                 .stream().anyMatch(it -> password.match(it, passwordEncoder));
+    }
+
+    public void setRoles(List<String> roles, UserRoleRepository userRoleRepository) {
+        UserRoleDO userRoleDO = new UserRoleDO(this, roles);
+        userRoleRepository.save(userRoleDO);
+    }
+
+    public boolean hasPermission(String functionName,
+                                 UserRoleRepository userRoleRepository) {
+        List<Role> roles = userRoleRepository.roleRepository().findAll(tenantId).toList();
+        Function<RoleName, Stream<? extends Role>> findRoleByName =
+                roleName -> roles.stream().filter(role -> role.isName(roleName));
+        return userRoleRepository.findById(this.id())
+                .map(UserRole::new)
+                .stream()
+                .flatMap(UserRole::rolesStream)
+                .flatMap(findRoleByName)
+                .anyMatch(role -> role.hasPermission(functionName));
     }
 }

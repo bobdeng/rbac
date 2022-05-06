@@ -41,5 +41,4 @@ public class UserPasswordTest {
         assertThat(user.verifyPassword(new Password("123455"), passwordRepository, new PasswordEncoderImpl()), is(false));
     }
 
-
 }
