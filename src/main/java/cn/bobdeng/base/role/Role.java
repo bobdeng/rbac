@@ -1,6 +1,5 @@
 package cn.bobdeng.base.role;
 
-import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import java.util.List;
@@ -13,6 +12,13 @@ public class Role {
 
     public Role(RoleName roleName, RoleFunctions roleFunctions) {
 
+        this.roleName = roleName;
+        this.roleFunctions = roleFunctions;
+        this.id = RoleId.empty();
+    }
+
+    public Role(RoleId id, RoleName roleName, RoleFunctions roleFunctions) {
+        this.id = id;
         this.roleName = roleName;
         this.roleFunctions = roleFunctions;
     }
@@ -41,5 +47,13 @@ public class Role {
 
     public boolean hasPermission(String functionName) {
         return this.roleFunctions.contains(functionName);
+    }
+
+    public boolean hasId() {
+        return id.notEmpty();
+    }
+
+    public Integer id() {
+        return id.getId();
     }
 }

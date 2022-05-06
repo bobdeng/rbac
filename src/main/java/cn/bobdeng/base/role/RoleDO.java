@@ -18,7 +18,7 @@ import javax.persistence.*;
 public class RoleDO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
     private String functions;
     private String tenantId;
@@ -27,5 +27,6 @@ public class RoleDO {
         this.tenantId = tenantId.id();
         this.functions = new Gson().toJson(role.functions());
         this.name = role.name();
+        this.id = role.id();
     }
 }

@@ -57,4 +57,29 @@ public class RoleTest {
         RoleAlreadyExistException e = assertThrows(RoleAlreadyExistException.class, () -> roles.saveRole(role, roleRepository));
         assertThat(e.getName(), is("admin"));
     }
+
+    @Test
+    public void should_save_role() throws RoleAlreadyExistException {
+        dummyDao.save(RoleDO.builder()
+                .id(1)
+                .name("admin")
+                .tenantId("1")
+                .functions("[\"1\"]")
+                .build());
+
+        Roles roles = new Roles(new TenantId("1"));
+        RoleName roleName = new RoleName("admin");
+        List<String> functions = Arrays.asList("1", "2", "3");
+        RoleFunctions roleFunctions = new RoleFunctions(functions);
+        Role role = new Role(new RoleId(1), roleName, roleFunctions);
+
+        roles.saveRole(role, roleRepository);
+
+        assertThat(dummyDao.all().size(), is(1));
+        RoleDO roleDO = dummyDao.all().get(0);
+        assertThat(roleDO.getFunctions(), is(new Gson().toJson(functions)));
+        assertThat(roleDO.getTenantId(), is("1"));
+        assertThat(roleDO.getName(), is("admin"));
+    }
+
 }

@@ -11,6 +11,11 @@ public class Roles {
     }
 
     public void saveRole(Role role, RoleRepository roleRepository) throws RoleAlreadyExistException {
+        if(role.hasId()) {
+            RoleDO roleDO = new RoleDO(tenantId, role);
+            roleRepository.save(roleDO);
+            return;
+        }
         if (roleRepository.findAll(tenantId)
                 .anyMatch(it->it.hasSameName(role))) {
             throw new RoleAlreadyExistException(role.name());
