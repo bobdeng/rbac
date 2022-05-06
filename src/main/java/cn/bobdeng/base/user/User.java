@@ -1,8 +1,10 @@
 package cn.bobdeng.base.user;
 
 import cn.bobdeng.base.TenantId;
+import lombok.Getter;
 
 public class User {
+    @Getter
     private UserId id;
     private TenantId tenantId;
     private UserName name;
@@ -31,9 +33,12 @@ public class User {
     }
 
     public void bindAccount(Account account, UserAccountRepository accountRepository) {
-        if (accountRepository.findAccount(tenantId, account).isPresent()) {
-            throw new UserAccountAlreadyExistException(account.name());
-        }
+        accountRepository.findAccount(tenantId, account)
+                .map(Account::new)
+                .filter(it -> !it.isUser(this))
+                .ifPresent(it -> {
+                    throw new UserAccountAlreadyExistException(account.name());
+                });
         accountRepository.save(new AccountDO(this, account));
     }
 
