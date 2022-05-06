@@ -17,4 +17,9 @@ public class UserRepositoryImpl implements UserRepository {
         return dummyDao.save(userDO);
     }
 
+    @Override
+    public Optional<User> findById(UserId id) {
+        return Optional.empty();
+    }
+
 }
