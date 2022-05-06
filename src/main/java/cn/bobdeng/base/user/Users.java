@@ -12,6 +12,10 @@ public class Users {
 
     public User newUser(NewUserRequest newUserRequest, UserRepository userRepository) throws UserAlreadyExistException {
         User user = newUserRequest.toUser();
+        if (userRepository.findByName(tenantId, user.name())
+                .isPresent()) {
+            throw new UserAlreadyExistException(user.name());
+        }
         UserDO userDO = userRepository.save(new UserDO(this, user));
         return new User(userDO);
     }

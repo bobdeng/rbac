@@ -1,11 +1,12 @@
 package cn.bobdeng.base.user;
 
+import lombok.Getter;
+
 public class UserAlreadyExistException extends Exception {
-    private String id;
+    @Getter
+    private String name;
 
-    public UserAlreadyExistException(String id) {
-
-        this.id = id;
+    public UserAlreadyExistException(String name) {
+        this.name = name;
     }
-
 }

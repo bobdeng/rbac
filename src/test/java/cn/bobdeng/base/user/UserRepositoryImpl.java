@@ -1,5 +1,6 @@
 package cn.bobdeng.base.user;
 
+import cn.bobdeng.base.TenantId;
 import cn.bobdeng.dummydao.DummyDao;
 
 import java.util.Objects;
@@ -20,6 +21,13 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public Optional<User> findById(UserId id) {
         return Optional.empty();
+    }
+
+    @Override
+    public Optional<User> findByName(TenantId tenantId, String name) {
+        return dummyDao.all().stream().filter(userDO -> Objects.equals(userDO.getName(), name))
+                .map(User::new)
+                .findFirst();
     }
 
 }
