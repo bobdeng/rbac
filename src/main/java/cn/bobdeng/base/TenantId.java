@@ -1,9 +1,9 @@
-package cn.bobdeng.base.user;
+package cn.bobdeng.base;
 
-public class UserId {
+public class TenantId {
     private String id;
 
-    public UserId(String id) {
+    public TenantId(String id) {
         this.id = id;
     }
 
