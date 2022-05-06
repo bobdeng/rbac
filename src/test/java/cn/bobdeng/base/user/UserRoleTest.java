@@ -61,4 +61,23 @@ public class UserRoleTest {
         assertThat(user.hasPermission("user.delete", userRoleRepository), is(false));
 
     }
+
+    @Test
+    public void user_has_any_permission_when_has_role() {
+        TenantId tenantId = new TenantId("1");
+        User user = new User(new UserId(100), tenantId);
+        String adminRole = "admin";
+        userRoleDao.save(UserRoleDO.builder()
+                .id(user.id())
+                .roles(new Gson().toJson(List.of(adminRole, "not_exist")))
+                .build());
+        roleDao.save(RoleDO.builder()
+                .functions(new Gson().toJson(List.of("user.create")))
+                .tenantId(tenantId.id())
+                .name(adminRole)
+                .build());
+
+        assertThat(user.hasAnyPermission(Arrays.asList("user.create","user.delete"), userRoleRepository), is(true));
+
+    }
 }

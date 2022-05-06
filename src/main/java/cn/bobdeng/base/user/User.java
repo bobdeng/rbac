@@ -79,4 +79,8 @@ public class User {
                 .flatMap(findRoleByName)
                 .anyMatch(role -> role.hasPermission(functionName));
     }
+
+    public boolean hasAnyPermission(List<String> functions, UserRoleRepository userRoleRepository) {
+        return functions.stream().anyMatch(function -> this.hasPermission(function, userRoleRepository));
+    }
 }
