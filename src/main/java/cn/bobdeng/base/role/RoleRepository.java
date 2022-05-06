@@ -8,5 +8,4 @@ public interface RoleRepository {
     void save(RoleDO roleDO);
 
     Stream<Role> findAll(TenantId tenantId);
-
 }

@@ -14,7 +14,7 @@ import java.util.List;
 @Builder
 @Data
 @Entity
-@Table(name = "t_")
+@Table(name = "rbac_user_role")
 public class UserRoleDO {
     @Id
     private int id;
