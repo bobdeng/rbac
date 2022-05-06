@@ -30,15 +30,16 @@ public class UserPasswordTest {
         PasswordDO passwordDO = dummyDao.all().get(0);
         assertThat(passwordDO.getPassword(), is(new PasswordEncoderImpl().encode("123456")));
     }
+
     @Test
-    public void should_return_true_when_verify_password_success(){
+    public void should_return_true_when_verify_password_success() {
         Password userPassword = new Password("123456");
         User user = new User(new UserId(1), null);
 
         user.setPassword(userPassword, passwordRepository);
 
-        assertThat(user.verifyPassword(new Password("123456"), passwordRepository, new PasswordEncoderImpl()), is(true));
-        assertThat(user.verifyPassword(new Password("123455"), passwordRepository, new PasswordEncoderImpl()), is(false));
+        assertThat(user.verifyPassword(new Password("123456"), passwordRepository), is(true));
+        assertThat(user.verifyPassword(new Password("123455"), passwordRepository), is(false));
     }
 
 }

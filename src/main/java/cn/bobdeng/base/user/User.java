@@ -56,10 +56,10 @@ public class User {
         passwordRepository.save(new PasswordDO(this, password, passwordRepository.passwordEncoder()));
     }
 
-    public boolean verifyPassword(Password password, PasswordRepository passwordRepository, PasswordEncoder passwordEncoder) {
+    public boolean verifyPassword(Password password, PasswordRepository passwordRepository) {
         return passwordRepository.findByUser(this)
                 .map(PasswordDO::password)
-                .stream().anyMatch(it -> password.match(it, passwordEncoder));
+                .stream().anyMatch(it -> password.match(it, passwordRepository.passwordEncoder()));
     }
 
     public void setRoles(List<String> roles, UserRoleRepository userRoleRepository) {
