@@ -45,4 +45,14 @@ public class User {
     public String tenantId() {
         return tenantId.id();
     }
+
+    public void setPassword(Password password, PasswordRepository passwordRepository, PasswordEncoder passwordEncoder) {
+        passwordRepository.save(new PasswordDO(this, password, passwordEncoder));
+    }
+
+    public boolean verifyPassword(Password password, PasswordRepository passwordRepository, PasswordEncoder passwordEncoder) {
+        return passwordRepository.findByUser(this)
+                .map(PasswordDO::password)
+                .stream().anyMatch(it -> password.match(it, passwordEncoder));
+    }
 }

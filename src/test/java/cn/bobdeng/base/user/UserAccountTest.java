@@ -34,11 +34,31 @@ public class UserAccountTest {
     }
 
     @Test
-    public void should_throw_when_account_exist() {
+    public void should_throw_when_create_account_exist() {
         Account userAccount = new Account("bob");
         accountDao.save(AccountDO.builder()
                 .id(100)
                 .name("bob")
+                .tenantId("1")
+                .build());
+        User user = new User(new UserId(1), new TenantId("1"));
+
+        UserAccountAlreadyExistException e = assertThrows(UserAccountAlreadyExistException.class, () -> user.bindAccount(userAccount, accountRepository));
+
+        assertThat(e.getAccount(), is("bob"));
+    }
+
+    @Test
+    public void should_throw_when_change_account_exist() {
+        Account userAccount = new Account("bob");
+        accountDao.save(AccountDO.builder()
+                .id(100)
+                .name("bob")
+                .tenantId("1")
+                .build());
+        accountDao.save(AccountDO.builder()
+                .id(1)
+                .name("joe")
                 .tenantId("1")
                 .build());
         User user = new User(new UserId(1), new TenantId("1"));
