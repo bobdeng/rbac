@@ -19,7 +19,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Optional<User> findById(UserId id) {
+    public Optional<User> findById(UserId id, TenantId tenantId) {
         return Optional.empty();
     }
 
