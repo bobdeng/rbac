@@ -11,16 +11,25 @@ public class Roles {
     }
 
     public void saveRole(Role role, RoleRepository roleRepository) throws RoleAlreadyExistException {
-        if(role.hasId()) {
-            RoleDO roleDO = new RoleDO(tenantId, role);
-            roleRepository.save(roleDO);
+        if (role.hasId()) {
+            update(role, roleRepository);
             return;
         }
+        create(role, roleRepository);
+    }
+
+    private void create(Role role, RoleRepository roleRepository) throws RoleAlreadyExistException {
         if (roleRepository.findAll(tenantId)
-                .anyMatch(it->it.hasSameName(role))) {
+                .anyMatch(it -> it.hasSameName(role))) {
             throw new RoleAlreadyExistException(role.name());
         }
-        RoleDO roleDO = new RoleDO(tenantId, role);
-        roleRepository.save(roleDO);
+        roleRepository.save(new RoleDO(tenantId, role));
+    }
+
+    private void update(Role role, RoleRepository roleRepository) {
+        if (roleRepository.findById(tenantId, role.id()).isEmpty()) {
+            throw new PermissionDeniedException();
+        }
+        roleRepository.save(new RoleDO(tenantId, role));
     }
 }

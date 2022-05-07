@@ -82,4 +82,14 @@ public class RoleTest {
         assertThat(roleDO.getName(), is("admin"));
     }
 
+    @Test
+    public void should_throw_when_save_role_with_different_tenant() {
+        RoleDO roleDO = dummyDao.save(RoleDO.builder()
+                .name("admin")
+                .tenantId("1")
+                .functions("[]").build());
+        Roles roles = new Roles(new TenantId("2"));
+        assertThrows(PermissionDeniedException.class, () -> roles.saveRole(new Role(new RoleId(roleDO.getId()), new RoleName("admin"), new RoleFunctions(Arrays.asList("123"))), roleRepository));
+    }
+
 }

@@ -3,6 +3,7 @@ package cn.bobdeng.base.role;
 import cn.bobdeng.base.TenantId;
 import cn.bobdeng.dummydao.DummyDao;
 
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class RoleRepositoryImpl implements RoleRepository {
@@ -24,5 +25,12 @@ public class RoleRepositoryImpl implements RoleRepository {
                 .stream()
                 .filter(roleDO -> roleDO.getTenantId().equals(tenantId.id()))
                 .map(Role::new);
+    }
+
+    @Override
+    public Optional<Role> findById(TenantId tenantId, Integer id) {
+        return findAll(tenantId)
+                .filter(role -> role.id().equals(id))
+                .findFirst();
     }
 }
